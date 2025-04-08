@@ -1,0 +1,48 @@
+controller:
+  installPlugins:
+    - job-dsl
+    - kubernetes
+    - workflow-job
+    - workflow-aggregator
+    - credentials-binding
+    - git
+    - pipeline-stage-view
+    - configuration-as-code
+
+  JCasC:
+    enabled: true
+    defaultConfig: false
+    configScripts:
+      kubernetes-agent-config: |
+        jenkins:
+          clouds:
+            - kubernetes:
+                name: "kubernetes"
+                namespace: "jenkins-workers"
+                jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+                jenkinsTunnel: "jenkins-agent.jenkins.svc.cluster.local:50000"
+                retentionTimeout: 5
+                containerCap: 10
+
+  serviceAccount:
+    create: true
+    name: "jenkins"
+    annotations: {}
+
+  replicas: 2
+
+  rbac:
+    create: true
+
+  persistence:
+    enabled: true
+    size: 8Gi
+    storageClass: "local-path"
+
+  clusterDomain: "cluster.local"
+
+  service:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+    agentListenerPort: 50000
