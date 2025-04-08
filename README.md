@@ -65,7 +65,7 @@ This project sets up a local Kubernetes environment with:
 
 A single Bash script installs or uninstalls the entire solution.
 
-```bash
+<!-- ```bash -->
 ./main.sh install    # Install everything
 ./main.sh uninstall  # Tear down everything
 
