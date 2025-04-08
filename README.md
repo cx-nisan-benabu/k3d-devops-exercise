@@ -65,9 +65,10 @@ This project sets up a local Kubernetes environment with:
 
 A single Bash script installs or uninstalls the entire solution.
 
-<!-- ```bash -->
-./main.sh install    # Install everything
-./main.sh uninstall  # Tear down everything
+```bash
+./main.sh install
+./main.sh uninstall
+```
 
 ---
 
@@ -81,3 +82,4 @@ To retrieve the current admin password, run:
 
 ```bash
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
