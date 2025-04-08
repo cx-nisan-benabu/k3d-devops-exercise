@@ -68,3 +68,16 @@ A single Bash script installs or uninstalls the entire solution.
 ```bash
 ./main.sh install    # Install everything
 ./main.sh uninstall  # Tear down everything
+
+---
+
+### 🔐 Accessing Grafana
+
+You will need this password in two places:
+- 🖥️ To log in to the [Grafana Dashboard](http://grafana.local)
+- 🧹 To authenticate during the `terraform destroy` process
+
+To retrieve the current admin password, run:
+
+```bash
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
