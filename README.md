@@ -7,7 +7,7 @@ This project sets up a local Kubernetes environment with:
 - **Grafana** (with a live dashboard for PostgreSQL metrics)
 - All services are exposed via **Traefik Ingress**
 
-> Works on **Minikube** or **K3d**.
+> Works on **K3d**.
 
 ---
 
@@ -21,7 +21,7 @@ This project sets up a local Kubernetes environment with:
 
 ### 🧱 Part 1: Setup and Deployment
 
-- Spin up a local Kubernetes cluster using **Minikube** or **K3d**
+- Spin up a local Kubernetes cluster using **K3d**
 - Install required tools: `kubectl`, `helm`, `docker`
 
 ### 🐘 Deploy PostgreSQL
@@ -56,6 +56,8 @@ This project sets up a local Kubernetes environment with:
   - CPU Usage
   - Memory Usage
   - PostgreSQL Transaction Throughput
+  - Active Connections
+  - Cache Hit Ratio
 
 ---
 
@@ -64,5 +66,5 @@ This project sets up a local Kubernetes environment with:
 A single Bash script installs or uninstalls the entire solution.
 
 ```bash
-./deploy.sh install    # Install everything
-./deploy.sh uninstall  # Tear down everything
+./main.sh install    # Install everything
+./main.sh uninstall  # Tear down everything
