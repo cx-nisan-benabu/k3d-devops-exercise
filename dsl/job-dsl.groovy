@@ -41,7 +41,7 @@ pipelineJob('K8s-Worker-Pod-Job') {
                             steps {
                                 sh """
                                     echo "🚀 Connecting to PostgreSQL..."
-                                    psql -h postgresql.default.svc.cluster.local -U postgres -d devops -c "INSERT INTO logs (timestamp) VALUES (NOW());"
+                                    psql -h postgresql.database.svc.cluster.local -U postgres -d devops -c "INSERT INTO logs (timestamp) VALUES (NOW());"
                                     echo "✅ Data successfully inserted into PostgreSQL."
                                 """
                             }

@@ -38,8 +38,8 @@ echo "[🌐] Applying Ingress rules for Jenkins, Grafana, and the Traefik dashbo
 kubectl apply -f traefik/ingress.yaml
 
 echo "[🛠️] Ensure local domains exist in /etc/hosts"
-HOSTS_LINE="127.0.0.1 jenkins.local grafana.local traefik.local"
-NEEDED_DOMAINS=("jenkins.local" "grafana.local" "traefik.local")
+HOSTS_LINE="127.0.0.1 jenkins.local grafana.local traefik.local pgadmin.local"
+NEEDED_DOMAINS=("jenkins.local" "grafana.local" "traefik.local" "pgadmin.local")
 MISSING=()
 
 for domain in "${NEEDED_DOMAINS[@]}"; do
@@ -53,7 +53,7 @@ if [ ${#MISSING[@]} -gt 0 ]; then
   echo "[🧰] Patching hosts file with local domain mappings..."
 
   # Remove any old conflicting entries
-  sudo sed -i.bak '/127.0.0.1.*jenkins.local\|grafana.local\|traefik.local/d' /etc/hosts
+  sudo sed -i.bak '/127.0.0.1.*jenkins.local\|grafana.local\|traefik.local\|pgadmin.local/d' /etc/hosts
 
   # Add the correct clean line
   echo "$HOSTS_LINE" | sudo tee -a /etc/hosts > /dev/null
@@ -67,3 +67,4 @@ echo "[🎉] All systems go! Setup complete."
 echo "[🔗] Jenkins → http://jenkins.local"
 echo "[🔗] Grafana → http://grafana.local"
 echo "[🔗] Traefik → http://traefik.local"
+echo "[🔗] pgAdmin → http://pgadmin.local"

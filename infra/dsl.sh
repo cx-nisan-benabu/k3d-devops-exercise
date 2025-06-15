@@ -4,6 +4,17 @@ NAMESPACE="jenkins"
 
 kubectl apply -f dsl/jenkins-worker-rbac.yaml
 
+echo "[🔐] Copying PostgreSQL secret to jenkins-workers namespace..."
+# Wait for database namespace to be ready
+kubectl wait --for=condition=Ready pod -l app.kubernetes.io/name=postgresql -n database --timeout=300s
+
+# Copy PostgreSQL secret from database namespace to jenkins-workers namespace
+kubectl get secret postgresql-secret -n database -o yaml | \
+  sed 's/namespace: database/namespace: jenkins-workers/' | \
+  kubectl apply -f -
+
+echo "[✅] PostgreSQL secret copied to jenkins-workers namespace"
+
 echo "[📘] Generating ConfigMaps for Job DSL initialization scripts..."
 kubectl create configmap jenkins-init-dsl \
   --from-file=dsl/init.groovy \

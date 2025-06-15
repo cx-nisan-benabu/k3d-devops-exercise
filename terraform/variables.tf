@@ -1,6 +1,6 @@
 # PostgreSQL Host and Database Variables
 variable "pg_host" {
-  default = "postgresql.default.svc.cluster.local:5432"
+  default = "postgresql.database.svc.cluster.local:5432"
 }
 
 variable "pg_database" {
@@ -14,6 +14,12 @@ variable "pg_user" {
 
 variable "pg_password" {
   description = "PostgreSQL password"
+  type        = string
+  sensitive   = true
+}
+
+variable "grafana_password" {
+  description = "Grafana admin password"
   type        = string
   sensitive   = true
 }
