@@ -2,6 +2,8 @@
 
 Local K3d environment with Jenkins, PostgreSQL, pgAdmin, and Grafana.
 
+![Architecture](image.png)
+
 ## 🚀 Quick Start
 
 ```bash
@@ -35,15 +37,6 @@ Local K3d environment with Jenkins, PostgreSQL, pgAdmin, and Grafana.
 ```bash
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode
 ```
-
-## 📁 Namespace Organization
-
-| **Namespace** | **Services** |
-|---------------|--------------|
-| `database` | PostgreSQL, pgAdmin |
-| `jenkins` | Jenkins server |
-| `monitoring` | Grafana |
-| `kube-system` | Traefik |
 
 ## ℹ️ What It Does
 
